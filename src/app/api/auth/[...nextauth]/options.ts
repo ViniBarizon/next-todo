@@ -7,24 +7,23 @@ export const options: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text", placeholder: "your@email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
-        console.log(req);
+      async authorize(credentials) {
+        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
         if (user.email === credentials?.email) {
-          return user
+          return user;
         } else {
-          return null
+          return null;
         }
-          }
-        })
-    ],
-    session: {
-      strategy: "jwt",  
-    },
-    secret: process.env.NEXTAUTH_SECRET,
-    pages: {
-        signIn: '/sign-in'
-    }
-}
+      },
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/sign-in",
+  },
+};
