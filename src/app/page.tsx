@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Logout from "./components/Logout";
+import Logout from "./components/SignOut";
 
 
 export default function Home() {
