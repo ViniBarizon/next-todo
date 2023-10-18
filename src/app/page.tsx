@@ -13,10 +13,9 @@ const router = useRouter();
 console.log(authStatus);
   return (
     <>
-      {authStatus === "authenticated" && 
+      { authStatus === "authenticated" ? 
         <Logout />
-      }
-      {authStatus !== "authenticated" && 
+      :
         router.replace("/sign-in")
       }      
     </>
