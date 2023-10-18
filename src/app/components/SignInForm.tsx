@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function SignInForm() {
   const email = useRef("");
@@ -11,6 +12,9 @@ export default function SignInForm() {
 
   const router = useRouter();
 
+  const teste = axios.get('http://localhost:3000/users');
+  console.log(teste);
+  
   const session = useSession();
   return (
     <>
