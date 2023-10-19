@@ -1,5 +1,8 @@
+import { User } from "@/app/types/User";
+import axios from "axios";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -10,9 +13,17 @@ export const options: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-        if (user.email === credentials?.email) {
-          return user;
+        const res = await axios.get(process.env.BACKEND_API_URL + "api/user");
+        const users = res.data as User[];
+        // @ts-ignore
+        const user = Array.from(users).find((user: User) => user.email == credentials.email);
+        
+        // @ts-ignore
+        const result = await bcrypt.compare(credentials.password, '$2a$' + user.password.slice(4));
+        
+        // @ts-ignore
+        if (user && user.email === credentials.email && result) {
+          return user as any;
         } else {
           return null;
         }
