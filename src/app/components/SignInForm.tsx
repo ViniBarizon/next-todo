@@ -1,48 +1,36 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Link from "next/link";
-
-type user = {
-  address: {}
-  company: {}
-  email: string
-  id: number
-  name: string
-  phone: string
-  username: string
-  website: string
-}
 
 export default function SignInForm() {
   const email = useRef("");
   const password = useRef("");
   const [error, setError] = useState("");
-  const [data, setData] = useState([]);
 
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('http://localhost:3000/users') as any;
-      setData(result.data.data);
-    };
-    fetchData();
-  }, []);
-  
-  console.log(data);
   const session = useSession();
+  
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
+        const result = await signIn('credentials', {
+          email: email.current,
+          password: password.current,
+          redirect: false
+        });
+        if (result?.status === 401) {
+          setError("E-mail ou senha incorretos")
+        } else {
+          router.replace("/");
+        }
+  }
+  
   return (
     <>
-      {/* {data.map((user, index) => (
-        <div key={index}>
-          <p>{user}</p>
-        </div>
-      ))} */}
-      {/* {session.status === "unauthenticated" ?
+      {session.status === "unauthenticated" ?
         <div className="flex items-center justify-center h-screen">
           <div className="mx-auto w-2/5 text-center">
             <form
@@ -68,15 +56,7 @@ export default function SignInForm() {
               </div>
               <button
                 className="bg-sky-300 hover:bg-sky-400 rounded-lg p-2 cursor-pointer border w-full"
-                onClick={async (e) => {
-                  e.preventDefault();
-                  await signIn('credentials', {
-                    email: email.current,
-                    password: password.current,
-                    redirect: false
-                  });
-                  router.replace("/");
-                }}
+                onClick={(e) => handleLogin(e)}
               >
                 Login
               </button>
@@ -98,7 +78,7 @@ export default function SignInForm() {
         </div>
         :
         router.replace("/")
-      } */}
+      }
     </>
   );
 }
