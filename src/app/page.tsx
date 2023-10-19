@@ -2,7 +2,6 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Logout from "./components/SignOut";
 
 
 export default function Home() {
@@ -14,8 +13,8 @@ console.log(authStatus);
   return (
     <>
       { authStatus === "authenticated" ? 
-        <Logout />
-      :
+        <h1>oi</h1>
+        :
         router.replace("/sign-in")
       }      
     </>
