@@ -85,7 +85,7 @@ export default function Navbar() {
                     </div>
                 </nav>
                 :
-                <nav className="py-2 justify-between h-16">
+                <nav className="justify-between h-16">
                     <div className="min-h-screen bg-gray-100">
                         <div className="hover:bg-white hover:shadow-sm  transition ease-in-out delay-850 flex justify-between px-10">
                             <div className="w-max p-2.5">
