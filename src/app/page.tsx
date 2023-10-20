@@ -13,7 +13,9 @@ console.log(authStatus);
   return (
     <>
       { authStatus === "authenticated" ? 
-        <h1>oi</h1>
+      <div className="absolute">
+        <h1>oiasdasdasdasd</h1>
+      </div>
         :
         router.replace("/sign-in")
       }      

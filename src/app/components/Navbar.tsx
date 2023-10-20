@@ -13,7 +13,7 @@ export default function Navbar() {
         <>
             { 
             session.status === "authenticated" ? 
-                <nav>
+                <nav className="float-left relative z-10">
                     <div className="min-h-screen bg-gray-100">
                         <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
                             <div className="flex h-screen flex-col justify-between pt-2 pb-6">
