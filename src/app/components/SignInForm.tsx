@@ -31,7 +31,7 @@ export default function SignInForm() {
   return (
     <>
       {session.status === "unauthenticated" ?
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex m-auto mt-10">
           <div className="mx-auto w-2/5 text-center">
             <form
               className="bg-zinc-200 rounded-lg p-14 text-center"
